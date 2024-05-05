@@ -8,17 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		B9F1CCA02BE779C100503C30 /* MaccabiExerciseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CC9F2BE779C100503C30 /* MaccabiExerciseApp.swift */; };
-		B9F1CCA22BE779C100503C30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCA12BE779C100503C30 /* ContentView.swift */; };
+		B9F1CCA22BE779C100503C30 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCA12BE779C100503C30 /* CategoriesView.swift */; };
 		B9F1CCA42BE779C500503C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F1CCA32BE779C500503C30 /* Assets.xcassets */; };
 		B9F1CCA72BE779C500503C30 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F1CCA62BE779C500503C30 /* Preview Assets.xcassets */; };
+		B9F1CCB12BE77FA900503C30 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB02BE77FA900503C30 /* ProductModel.swift */; };
+		B9F1CCB32BE780BF00503C30 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB22BE780BF00503C30 /* CategoriesViewModel.swift */; };
+		B9F1CCB52BE780DC00503C30 /* CategoryProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB42BE780DC00503C30 /* CategoryProductsViewModel.swift */; };
+		B9F1CCB82BE781EA00503C30 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB72BE781EA00503C30 /* ProductsService.swift */; };
+		B9F1CCBA2BE7B61B00503C30 /* ProductsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB92BE7B61B00503C30 /* ProductsServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B9F1CC9C2BE779C100503C30 /* MaccabiExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaccabiExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F1CC9F2BE779C100503C30 /* MaccabiExerciseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaccabiExerciseApp.swift; sourceTree = "<group>"; };
-		B9F1CCA12BE779C100503C30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B9F1CCA12BE779C100503C30 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		B9F1CCA32BE779C500503C30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9F1CCA62BE779C500503C30 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B9F1CCB02BE77FA900503C30 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		B9F1CCB22BE780BF00503C30 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		B9F1CCB42BE780DC00503C30 /* CategoryProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsViewModel.swift; sourceTree = "<group>"; };
+		B9F1CCB72BE781EA00503C30 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
+		B9F1CCB92BE7B61B00503C30 /* ProductsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,11 @@
 			isa = PBXGroup;
 			children = (
 				B9F1CC9F2BE779C100503C30 /* MaccabiExerciseApp.swift */,
-				B9F1CCA12BE779C100503C30 /* ContentView.swift */,
+				B9F1CCAD2BE77B1700503C30 /* model */,
+				B9F1CCAE2BE77B2700503C30 /* view */,
+				B9F1CCAF2BE77B4000503C30 /* view model */,
+				B9F1CCB62BE7813D00503C30 /* services */,
+				B9F1CCBB2BE7BF6100503C30 /* Helpers */,
 				B9F1CCA32BE779C500503C30 /* Assets.xcassets */,
 				B9F1CCA52BE779C500503C30 /* Preview Content */,
 			);
@@ -65,6 +79,47 @@
 				B9F1CCA62BE779C500503C30 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B9F1CCAD2BE77B1700503C30 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B9F1CCB02BE77FA900503C30 /* ProductModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B9F1CCAE2BE77B2700503C30 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B9F1CCA12BE779C100503C30 /* CategoriesView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		B9F1CCAF2BE77B4000503C30 /* view model */ = {
+			isa = PBXGroup;
+			children = (
+				B9F1CCB22BE780BF00503C30 /* CategoriesViewModel.swift */,
+				B9F1CCB42BE780DC00503C30 /* CategoryProductsViewModel.swift */,
+			);
+			path = "view model";
+			sourceTree = "<group>";
+		};
+		B9F1CCB62BE7813D00503C30 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				B9F1CCB72BE781EA00503C30 /* ProductsService.swift */,
+				B9F1CCB92BE7B61B00503C30 /* ProductsServiceProtocol.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		B9F1CCBB2BE7BF6100503C30 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9F1CCA22BE779C100503C30 /* ContentView.swift in Sources */,
+				B9F1CCA22BE779C100503C30 /* CategoriesView.swift in Sources */,
+				B9F1CCBA2BE7B61B00503C30 /* ProductsServiceProtocol.swift in Sources */,
+				B9F1CCB12BE77FA900503C30 /* ProductModel.swift in Sources */,
+				B9F1CCB32BE780BF00503C30 /* CategoriesViewModel.swift in Sources */,
+				B9F1CCB52BE780DC00503C30 /* CategoryProductsViewModel.swift in Sources */,
 				B9F1CCA02BE779C100503C30 /* MaccabiExerciseApp.swift in Sources */,
+				B9F1CCB82BE781EA00503C30 /* ProductsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

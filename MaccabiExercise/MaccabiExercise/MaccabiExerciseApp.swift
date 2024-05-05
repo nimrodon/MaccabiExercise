@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct MaccabiExerciseApp: App {
+    
+    private let productsService: ProductsServiceProtocol
+    private let viewModel: CategoriesViewModel
+
+    init() {
+        print("init app")
+        productsService = ProductsService()
+        viewModel = CategoriesViewModel(productsService)
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CategoriesView()
+                .environmentObject(viewModel)
+                .task {
+                    await viewModel.fetchProducts()
+                }
         }
     }
 }
