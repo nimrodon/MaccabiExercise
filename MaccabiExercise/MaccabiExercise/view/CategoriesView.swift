@@ -9,15 +9,22 @@ import SwiftUI
 
 struct CategoriesView: View {
     
+    @EnvironmentObject var viewModel: CategoriesViewModel
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            if (viewModel.isDataReady) {
+                LazyVStack {
+                    ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
+                        CategoryCardView(categoryDisplayModel: viewModel.categoriesDisplayModel[index])
+                            .padding()
+                    }
+                }
+            }
+            else  {
+                Text("Loading...")
+            }
         }
-        .padding()
     }
 }
 

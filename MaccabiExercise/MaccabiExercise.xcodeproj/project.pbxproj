@@ -16,6 +16,7 @@
 		B9F1CCB52BE780DC00503C30 /* CategoryProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB42BE780DC00503C30 /* CategoryProductsViewModel.swift */; };
 		B9F1CCB82BE781EA00503C30 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB72BE781EA00503C30 /* ProductsService.swift */; };
 		B9F1CCBA2BE7B61B00503C30 /* ProductsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCB92BE7B61B00503C30 /* ProductsServiceProtocol.swift */; };
+		B9F1CCBF2BE7F15100503C30 /* CategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F1CCBE2BE7F15100503C30 /* CategoryCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B9F1CCB42BE780DC00503C30 /* CategoryProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProductsViewModel.swift; sourceTree = "<group>"; };
 		B9F1CCB72BE781EA00503C30 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		B9F1CCB92BE7B61B00503C30 /* ProductsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsServiceProtocol.swift; sourceTree = "<group>"; };
+		B9F1CCBE2BE7F15100503C30 /* CategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				B9F1CCA12BE779C100503C30 /* CategoriesView.swift */,
+				B9F1CCBE2BE7F15100503C30 /* CategoryCardView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				B9F1CCBA2BE7B61B00503C30 /* ProductsServiceProtocol.swift in Sources */,
 				B9F1CCB12BE77FA900503C30 /* ProductModel.swift in Sources */,
 				B9F1CCB32BE780BF00503C30 /* CategoriesViewModel.swift in Sources */,
+				B9F1CCBF2BE7F15100503C30 /* CategoryCardView.swift in Sources */,
 				B9F1CCB52BE780DC00503C30 /* CategoryProductsViewModel.swift in Sources */,
 				B9F1CCA02BE779C100503C30 /* MaccabiExerciseApp.swift in Sources */,
 				B9F1CCB82BE781EA00503C30 /* ProductsService.swift in Sources */,

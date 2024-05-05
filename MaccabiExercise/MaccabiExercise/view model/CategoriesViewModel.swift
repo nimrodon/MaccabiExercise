@@ -7,14 +7,13 @@
 
 import Foundation
 
-
 typealias CategoryName = String
 
 final class CategoriesViewModel: ObservableObject {
     
     private var productsService: ProductsServiceProtocol
     
-    @Published private(set) var isLoading = false
+    @Published private(set) var isDataReady = false
     @Published private(set) var exception: ProductsServiceError?
     
     @Published private(set) var productsDisplayModel: [CategoryName: [Product]] = [:]
@@ -24,24 +23,22 @@ final class CategoriesViewModel: ObservableObject {
     init(_ productsService: ProductsServiceProtocol) {
         self.productsService = productsService
     }
-    
+
     
     func fetchProducts() async {
-        print("fetch products")
-        isLoading = true
-        defer { isLoading = false }
+//        defer { isDataReady = true }
         do {
             let products = try await productsService.getProductsData()
-           
-//            DispatchQueue.main.async {
-            self.buildDisplayModels(products: products)
-            self.isLoading = false
-//            }
+            DispatchQueue.main.async {
+                self.buildDisplayModels(products: products)
+                self.isDataReady = true
+            }
         }
         catch {
             
         }
     }
+    
     
     func buildDisplayModels(products: [Product]) {
 
