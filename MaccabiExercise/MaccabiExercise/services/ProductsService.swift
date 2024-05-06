@@ -7,14 +7,6 @@
 
 import Foundation
 
-
-enum ProductsServiceError : Error {
-    case networkError
-    case parsingError
-    case unknownError
-}
-
-
 class ProductsService : ProductsServiceProtocol {
  
     let apiEndPoint = "https://dummyjson.com/products?limit=100"
@@ -22,21 +14,26 @@ class ProductsService : ProductsServiceProtocol {
     func getProductsData() async throws -> [Product] {
         
         guard let url = URL(string: apiEndPoint) else {
-            return []
+            throw NetworkError.invalidURL
         }
+
         let request = URLRequest(url: url)
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw ProductsServiceError.unknownError
-        }
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw ProductsServiceError.networkError
-        }
         do {
-            let productsQueryResponse = try JSONDecoder().decode(ProductsQueryResponse.self, from: data)
+
+            let productsQueryResponse = try await NetworkRequestHelper.fetchJSON(ProductsQueryResponse.self, from: request)
             return productsQueryResponse.products
+
+        } catch let networkError as NetworkError {
+
+            print(networkError.description)
+            throw networkError
+
         } catch {
-            throw ProductsServiceError.parsingError
+
+            print("Unknown Error: \(error.localizedDescription)")
+            throw NetworkError.unknown(description: error.localizedDescription)
+
         }
     }
+  
 }

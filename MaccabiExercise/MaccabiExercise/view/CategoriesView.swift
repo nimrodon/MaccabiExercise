@@ -25,6 +25,7 @@ struct CategoriesView: View {
                                 CategoryCardView(category: category)
                                     .padding()
                             }
+                            .foregroundColor(.primary)
                         }
                     }
                 }

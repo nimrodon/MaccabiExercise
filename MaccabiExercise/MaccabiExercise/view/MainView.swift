@@ -12,11 +12,17 @@ struct MainView: View {
     @EnvironmentObject var viewModel: CategoriesViewModel
     
     var body: some View {
-        if (viewModel.isDataReady) {
+        if viewModel.isDataReady {
             CategoriesView()
         }
         else {
-            Text("Loading...")
+            if viewModel.errorMessage != nil {
+                ErrorMessageView(errorMessage: viewModel.errorMessage!,
+                                 showRetryButton: viewModel.showRetryButton)
+            }
+            else {
+                Text("Loading...")
+            }
         }
     }
 }

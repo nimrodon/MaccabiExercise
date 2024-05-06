@@ -13,24 +13,30 @@ struct CategoryCardView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20) // Adjust the corner radius to your preference
-                .fill(Color.blue.opacity(0.3)) // Adjust opacity or color to your preference
-                .frame(width: 300, height: 300) // Adjust width and height as needed
-            
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.blue.opacity(0.3))
             VStack {
                 Text(category.name)
+                    .font(.largeTitle)
+                
                 AsyncImage(url: URL(string: category.thumbnailURL)) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
                     Text("Loading image...")
                 }
-                .frame(width: 200, height: 200)
-                
+                    .frame(width: 200, height: 200)
+            
+                Spacer(minLength: 30)
+
                 Text("Number of products: \(category.distinctProductsCount)")
+                
                 Text("Items in stock: \(category.productsInStockCount)")
             }
+            .padding()
         }
+        .frame(height:340)
+        
     }
 
 }

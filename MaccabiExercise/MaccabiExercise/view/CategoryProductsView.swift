@@ -21,6 +21,7 @@ struct CategoryProductsView: View {
                 }
             }
         }
+        .navigationTitle(categoryName)
     }
 }
 
