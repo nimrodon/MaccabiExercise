@@ -13,8 +13,8 @@ struct CategoriesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                if (viewModel.isDataReady) {
+            VStack {
+                ScrollView {
                     LazyVStack {
                         ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
                             
@@ -28,10 +28,8 @@ struct CategoriesView: View {
                         }
                     }
                 }
-                else  {
-                    Text("Loading...")
-                }
             }
+            .navigationTitle("Categories")
         }
     }
 }

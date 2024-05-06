@@ -21,11 +21,12 @@ struct MaccabiExerciseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CategoriesView()
+            MainView()
                 .environmentObject(viewModel)
                 .task {
                     await viewModel.fetchProducts()
                 }
+//                .ignoresSafeArea(edges: [])
         }
     }
 }
