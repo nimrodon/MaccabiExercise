@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryCardView: View {
     
-    var categoryDisplayModel: CategoryDisplayModel
+    var category: CategoryDisplayModel
     
     var body: some View {
         ZStack {
@@ -18,8 +18,8 @@ struct CategoryCardView: View {
                 .frame(width: 300, height: 300) // Adjust width and height as needed
             
             VStack {
-                Text(categoryDisplayModel.name)
-                AsyncImage(url: URL(string: categoryDisplayModel.thumbnailURL)) { image in
+                Text(category.name)
+                AsyncImage(url: URL(string: category.thumbnailURL)) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
@@ -27,8 +27,8 @@ struct CategoryCardView: View {
                 }
                 .frame(width: 200, height: 200)
                 
-                Text("Number of products: \(categoryDisplayModel.distinctProductsCount)")
-                Text("Items in stock: \(categoryDisplayModel.productsInStockCount)")
+                Text("Number of products: \(category.distinctProductsCount)")
+                Text("Items in stock: \(category.productsInStockCount)")
             }
         }
     }
@@ -36,5 +36,5 @@ struct CategoryCardView: View {
 }
 
 #Preview {
-    CategoryCardView(categoryDisplayModel: CategoryDisplayModel(name: "Laptops", thumbnailURL: "https://cdn.dummyjson.com/product-images/6/thumbnail.png", distinctProductsCount: 5, productsInStockCount: 145, order: 1))
+    CategoryCardView(category: CategoryDisplayModel(name: "Laptops", thumbnailURL: "https://cdn.dummyjson.com/product-images/6/thumbnail.png", distinctProductsCount: 5, productsInStockCount: 145, order: 1))
 }

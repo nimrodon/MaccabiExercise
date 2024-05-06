@@ -12,17 +12,25 @@ struct CategoriesView: View {
     @EnvironmentObject var viewModel: CategoriesViewModel
     
     var body: some View {
-        ScrollView {
-            if (viewModel.isDataReady) {
-                LazyVStack {
-                    ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
-                        CategoryCardView(categoryDisplayModel: viewModel.categoriesDisplayModel[index])
-                            .padding()
+        NavigationView {
+            ScrollView {
+                if (viewModel.isDataReady) {
+                    LazyVStack {
+                        ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
+                            
+                            let category: CategoryDisplayModel = viewModel.categoriesDisplayModel[index]
+                            let products: [ProductDisplayModel] = viewModel.productsDisplayModel[category.name] ?? []
+                            
+                            NavigationLink (destination: CategoryProductsView(categoryName: category.name, products: products))  {
+                                CategoryCardView(category: category)
+                                    .padding()
+                            }
+                        }
                     }
                 }
-            }
-            else  {
-                Text("Loading...")
+                else  {
+                    Text("Loading...")
+                }
             }
         }
     }

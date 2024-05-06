@@ -16,7 +16,7 @@ final class CategoriesViewModel: ObservableObject {
     @Published private(set) var isDataReady = false
     @Published private(set) var exception: ProductsServiceError?
     
-    @Published private(set) var productsDisplayModel: [CategoryName: [Product]] = [:]
+    @Published private(set) var productsDisplayModel: [CategoryName: [ProductDisplayModel]] = [:]
     @Published private(set) var categoriesDisplayModel: [CategoryDisplayModel] = []
     
     
@@ -59,7 +59,8 @@ final class CategoriesViewModel: ObservableObject {
                 categoriesDisplayModelDict[product.category]?.distinctProductsCount += 1
                 categoriesDisplayModelDict[product.category]?.productsInStockCount += product.stock
             }
-            productsDisplayModel[product.category]?.append(product)
+            let productDisplayModel = ProductDisplayModel(name: product.title, imageURLs: product.images, price: product.price, stockCount: product.stock)
+            productsDisplayModel[product.category]?.append(productDisplayModel)
         }
         
         categoriesDisplayModel = categoriesDisplayModelDict.values.sorted { $0.order < $1.order }
