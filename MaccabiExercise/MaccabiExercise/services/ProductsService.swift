@@ -7,12 +7,21 @@
 
 import Foundation
 
+/*
+ 
+ A service for managing product data.
+ 
+ */
+
 class ProductsService : ProductsServiceProtocol {
  
+    // The URL of the API endpoint for retrieving product data.
     let apiEndPoint = "https://dummyjson.com/products?limit=100"
     
+    // An optional cache service for storing product data locally.
     var cacheService: ProductsCacheServiceProtocol?
 
+    // The duration (in seconds) for which cached product data remains valid.
     let cachingPeriodInSeconds: TimeInterval = 3600
 
     
@@ -21,6 +30,12 @@ class ProductsService : ProductsServiceProtocol {
     }
 
     
+    /*
+     Retrieves product data, either from the cache or the API.
+     
+     - Returns: An array of `Product` objects.
+     - Throws: Any errors encountered during the retrieval process.
+    */
     func getProducts() async throws -> [Product] {
         
         let currentTime = Date()
@@ -37,7 +52,13 @@ class ProductsService : ProductsServiceProtocol {
     }
     
     
-    func getProductsFromAPI() async throws -> [Product] {
+    /*
+     Fetches product data from the remote API endpoint.
+
+     - Returns: An array of `Product` objects retrieved from the API.
+     - Throws: Any network-related errors encountered during the API request.
+    */
+    private func getProductsFromAPI() async throws -> [Product] {
         
         guard let url = URL(string: apiEndPoint) else {
             throw NetworkError.invalidURL
@@ -62,6 +83,4 @@ class ProductsService : ProductsServiceProtocol {
 
         }
     }
-
-
 }
