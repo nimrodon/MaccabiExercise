@@ -25,12 +25,12 @@ class ProductsService : ProductsServiceProtocol {
 
         } catch let networkError as NetworkError {
 
-            print(networkError.description)
+            print("*** ProductsService => NetworkError: \(networkError.description)")
             throw networkError
 
         } catch {
 
-            print("Unknown Error: \(error.localizedDescription)")
+            print("*** ProductsService => Unknown Error: \(error.localizedDescription)")
             throw NetworkError.unknown(description: error.localizedDescription)
 
         }

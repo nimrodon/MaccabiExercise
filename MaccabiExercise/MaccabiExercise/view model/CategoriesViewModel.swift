@@ -48,7 +48,7 @@ final class CategoriesViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.isDataReady = false
                 self.errorMessage = "Unknown error: \(error.localizedDescription)"
-                self.showRetryButton = true
+                self.showRetryButton = false
             }
         }
     }
