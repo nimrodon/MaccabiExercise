@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ErrorMessageView: View {
     
-    @EnvironmentObject var viewModel: CategoriesViewModel
+    @EnvironmentObject var viewModel: ProductsViewModel
     
     var errorMessage: String
     var showRetryButton: Bool

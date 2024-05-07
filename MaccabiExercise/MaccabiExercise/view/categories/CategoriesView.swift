@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesView: View {
     
-    @EnvironmentObject var viewModel: CategoriesViewModel
+    @EnvironmentObject var viewModel: ProductsViewModel
     
     var body: some View {
         NavigationView {

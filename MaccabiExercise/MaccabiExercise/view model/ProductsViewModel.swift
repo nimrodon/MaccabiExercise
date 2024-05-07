@@ -1,5 +1,5 @@
 //
-//  CategoriesViewModel.swift
+//  ProductsViewModel.swift
 //  MaccabiExercise
 //
 //  Created by Nimrod Yizhar on 05/05/2024.
@@ -9,7 +9,7 @@ import Foundation
 
 typealias CategoryName = String
 
-final class CategoriesViewModel: ObservableObject {
+final class ProductsViewModel: ObservableObject {
     
     private var productsService: ProductsServiceProtocol
     

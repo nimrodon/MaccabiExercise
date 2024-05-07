@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @EnvironmentObject var viewModel: CategoriesViewModel
+    @EnvironmentObject var viewModel: ProductsViewModel
     
     var body: some View {
         if viewModel.isDataReady {

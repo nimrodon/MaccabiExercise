@@ -11,12 +11,12 @@ import SwiftUI
 struct MaccabiExerciseApp: App {
     
     private let productsService: ProductsServiceProtocol
-    private let viewModel: CategoriesViewModel
+    private let viewModel: ProductsViewModel
 
     init() {
         print("init app")
         productsService = ProductsService()
-        viewModel = CategoriesViewModel(productsService)
+        viewModel = ProductsViewModel(productsService)
     }
 
     var body: some Scene {
