@@ -26,6 +26,7 @@ struct CategoryCardView: View {
                     Text("Loading image...")
                 }
                     .frame(width: 200, height: 200)
+                    .cornerRadius(20)
             
                 Spacer(minLength: 30)
 

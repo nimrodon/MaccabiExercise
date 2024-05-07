@@ -17,7 +17,6 @@ struct CategoryProductsView: View {
             LazyVStack {
                 ForEach(products.indices, id: \.self) { index in
                     ProductView(product: products[index])
-                        .padding()
                 }
             }
         }
