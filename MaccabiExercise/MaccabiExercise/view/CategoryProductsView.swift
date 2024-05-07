@@ -24,6 +24,9 @@ struct CategoryProductsView: View {
     }
 }
 
-//#Preview {
-//    CategoryProductsView()
-//}
+#Preview {
+    CategoryProductsView(categoryName: "Cellphones", products: [
+        ProductDisplayModel(name: "iphone 12", imageURLs: ["https://cdn.dummyjson.com/product-images/26/thumbnail.jpg"], price: 799, stockCount: 174),
+        ProductDisplayModel(name: "iphone 15", imageURLs: ["https://cdn.dummyjson.com/product-images/26/thumbnail.jpg"], price: 899, stockCount: 83)
+    ])
+}

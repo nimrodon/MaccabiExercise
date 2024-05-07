@@ -19,11 +19,11 @@ struct CategoryView: View {
             AsyncImage(url: URL(string: category.thumbnailURL)) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                Text("Loading image...")
-            }
-            .frame(width: 200, height: 200)
-            .cornerRadius(20)
+                } placeholder: {
+                    Text("Loading image...")
+                }
+                .frame(width: 200, height: 200)
+                .cornerRadius(20)
             
             Spacer(minLength: 30)
             
@@ -39,5 +39,5 @@ struct CategoryView: View {
 }
 
 #Preview {
-    CategoryView(category: CategoryDisplayModel(name: "Laptops", thumbnailURL: "https://cdn.dummyjson.com/product-images/6/thumbnail.png", distinctProductsCount: 5, productsInStockCount: 145, order: 1))
+    CategoryView(category: CategoryDisplayModel(name: "Laptops", thumbnailURL: "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg", distinctProductsCount: 5, productsInStockCount: 145, order: 1))
 }

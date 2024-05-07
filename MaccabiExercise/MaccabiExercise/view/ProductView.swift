@@ -17,14 +17,10 @@ struct ProductView: View {
 
             AsyncImage(url: URL(string: product.imageURLs[0])) { image in
                 image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 150)
-                    .cornerRadius(8)
-                    .padding(.bottom, 8)
-
-            } placeholder: {
-                Text("Loading image...")
-            }
+                     .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    Text("Loading image...")
+                }
                 .frame(width: 200, height: 200)
                 .cornerRadius(20)
 
@@ -56,5 +52,5 @@ struct ProductView: View {
 }
 
 #Preview {
-    ProductView(product: ProductDisplayModel(name: "new arrivals Fashion motocross", imageURLs: ["https://cdn.dummyjson.com/product-images/99/thumbnail.jpg"], price: 46, stockCount: 138))
+    ProductView(product: ProductDisplayModel(name: "new arrivals Fashion motocross", imageURLs: ["https://cdn.dummyjson.com/product-images/26/thumbnail.jpg"], price: 46, stockCount: 138))
 }
