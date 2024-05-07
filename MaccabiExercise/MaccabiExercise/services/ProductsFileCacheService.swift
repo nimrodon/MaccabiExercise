@@ -11,6 +11,7 @@ class ProductsFileCacheService: ProductsCacheServiceProtocol {
     
     let cacheFileName = "cachedProducts.json"
 
+    
     func cacheProducts(products: [Product]) {
         guard let cacheURL = cacheURL() else { return }
 

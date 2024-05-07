@@ -28,8 +28,6 @@ final class ProductsViewModel: ObservableObject {
     
     func fetchProducts() async {
         
-        
-        
         do {
 
             let products = try await productsService.getProducts()
@@ -68,7 +66,7 @@ final class ProductsViewModel: ObservableObject {
     }
     
     
-    func buildDisplayModels(products: [Product]) {
+    private func buildDisplayModels(products: [Product]) {
 
         var categoriesDisplayModelDict: [CategoryName: CategoryDisplayModel] = [:]
         var categoryCounter = 0

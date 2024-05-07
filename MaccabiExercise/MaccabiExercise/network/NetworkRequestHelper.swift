@@ -9,6 +9,7 @@ import Foundation
 
 class NetworkRequestHelper {
     
+    
     static func fetchJSON<T: Decodable>(_ type: T.Type, from request: URLRequest) async throws -> T {
         let data = try await fetchData(for: request)
         do {

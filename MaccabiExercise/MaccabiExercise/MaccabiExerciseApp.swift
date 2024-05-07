@@ -14,7 +14,6 @@ struct MaccabiExerciseApp: App {
     private let viewModel: ProductsViewModel
 
     init() {
-        print("init app")
         productsService = ProductsService()
         viewModel = ProductsViewModel(productsService)
     }
@@ -26,7 +25,6 @@ struct MaccabiExerciseApp: App {
                 .task {
                     await viewModel.fetchProducts()
                 }
-//                .ignoresSafeArea(edges: [])
         }
     }
 }
