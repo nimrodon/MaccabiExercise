@@ -49,14 +49,7 @@ struct ProductView: View {
 
             Spacer()
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 10)
-            .stroke(Color.gray, lineWidth: 1))
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-        .padding(.horizontal, 20)
+            .cardFrame()
     }
     
    

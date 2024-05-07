@@ -22,8 +22,7 @@ struct CategoriesView: View {
                             let products: [ProductDisplayModel] = viewModel.productsDisplayModel[category.name] ?? []
                             
                             NavigationLink (destination: CategoryProductsView(categoryName: category.name, products: products))  {
-                                CategoryCardView(category: category)
-                                    .padding()
+                                CategoryView(category: category)
                             }
                             .foregroundColor(.primary)
                         }
