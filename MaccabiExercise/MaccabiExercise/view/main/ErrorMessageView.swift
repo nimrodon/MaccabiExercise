@@ -11,13 +11,14 @@ struct ErrorMessageView: View {
     
     @EnvironmentObject var viewModel: ProductsViewModel
     
+    var errorTitle: String
     var errorMessage: String
     var showRetryButton: Bool
 
     var body: some View {
         VStack {
             
-            Text("Loading data failed:")
+            Text(errorTitle)
                 .font(.headline)
                 .foregroundColor(.red)
 
@@ -40,5 +41,5 @@ struct ErrorMessageView: View {
 }
 
 #Preview {
-    ErrorMessageView(errorMessage: "Computer temperature high!", showRetryButton: true).environmentObject(ProductsViewModel(ProductsService()))
+    ErrorMessageView(errorTitle: "Loading products failed", errorMessage: "Computer temperature high!", showRetryButton: true).environmentObject(ProductsViewModel(ProductsService()))
 }

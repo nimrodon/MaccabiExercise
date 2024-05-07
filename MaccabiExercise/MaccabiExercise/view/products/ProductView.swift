@@ -15,7 +15,7 @@ struct ProductView: View {
         
         VStack(alignment: .center, spacing: 8) {
 
-            DisplayImage(imageURL: product.imageURL, width: 150, height: 150)
+            RemoteImage(imageURL: product.imageURL, width: 150, height: 150)
 
             HStack {
                 VStack (alignment: .leading) {

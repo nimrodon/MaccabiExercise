@@ -21,11 +21,12 @@ struct MainView: View {
         }
         else {
             if viewModel.errorMessage != nil {
-                ErrorMessageView(errorMessage: viewModel.errorMessage!,
+                ErrorMessageView(errorTitle: "Loading Products failed",
+                                 errorMessage: viewModel.errorMessage!,
                                  showRetryButton: viewModel.showRetryButton)
             }
             else {
-                Text("Loading...")
+                Text("Loading Products...")
             }
         }
     }

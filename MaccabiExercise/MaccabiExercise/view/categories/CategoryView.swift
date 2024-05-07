@@ -13,11 +13,10 @@ struct CategoryView: View {
     
     var body: some View {
         VStack {
-
             Text(category.name)
                 .font(.title)
 
-            DisplayImage(imageURL: category.thumbnailURL, width: 150, height: 150)
+            RemoteImage(imageURL: category.thumbnailURL, width: 150, height: 150)
             
             Spacer(minLength: 30)
             

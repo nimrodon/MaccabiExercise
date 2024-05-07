@@ -19,7 +19,7 @@ class ProductsService : ProductsServiceProtocol {
     let apiEndPoint = "https://dummyjson.com/products?limit=100"
     
     // An optional cache service for storing product data locally.
-    var cacheService: ProductsCacheServiceProtocol?
+    let cacheService: ProductsCacheServiceProtocol?
 
     // The duration (in seconds) for which cached product data remains valid.
     let cachingPeriodInSeconds: TimeInterval = 3600

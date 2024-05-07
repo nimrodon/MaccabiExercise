@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DisplayImage: View {
+struct RemoteImage: View {
     
     var imageURL: String
     var width: CGFloat
