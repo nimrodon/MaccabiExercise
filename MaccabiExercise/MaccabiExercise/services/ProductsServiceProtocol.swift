@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ProductsServiceProtocol {
-    func getProductsData() async throws -> [Product]
+    
+    func getProducts() async throws -> [Product]
 }
 
 

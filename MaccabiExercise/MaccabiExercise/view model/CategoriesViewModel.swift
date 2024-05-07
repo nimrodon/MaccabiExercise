@@ -27,9 +27,12 @@ final class CategoriesViewModel: ObservableObject {
 
     
     func fetchProducts() async {
+        
+        
+        
         do {
 
-            let products = try await productsService.getProductsData()
+            let products = try await productsService.getProducts()
 
             DispatchQueue.main.async {
                 self.buildDisplayModels(products: products)
