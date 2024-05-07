@@ -5,10 +5,9 @@
 //  Created by Nimrod Yizhar on 07/05/2024.
 //
 
-import Foundation
 import SwiftUI
 
-struct cardFrameModifier: ViewModifier {
+struct outlineFrameModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
@@ -26,7 +25,7 @@ struct cardFrameModifier: ViewModifier {
 
 extension View {
     
-    func cardFrame() -> some View {
-        self.modifier(cardFrameModifier())
+    func outlineFrame() -> some View {
+        self.modifier(outlineFrameModifier())
     }
 }

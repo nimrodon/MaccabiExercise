@@ -16,15 +16,29 @@ struct ErrorMessageView: View {
 
     var body: some View {
         VStack {
+            
             Text("Loading data failed:")
+                .font(.headline)
+                .foregroundColor(.red)
+
             Text(errorMessage)
-            if (showRetryButton) {
-                Button ("Retry", action: viewModel.retryFetchProducts)
+                .multilineTextAlignment(.center)
+                .padding()
+
+            if showRetryButton {
+                Button("Retry", action: viewModel.retryFetchProducts)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(8)
             }
         }
+        .outlineFrame()
     }
 }
 
 #Preview {
-    ErrorMessageView(errorMessage: "Computer temperature high!", showRetryButton: true)
+    ErrorMessageView(errorMessage: "Computer temperature high!", showRetryButton: true).environmentObject(ProductsViewModel(ProductsService()))
 }

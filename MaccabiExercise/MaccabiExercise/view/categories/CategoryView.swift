@@ -13,17 +13,11 @@ struct CategoryView: View {
     
     var body: some View {
         VStack {
+
             Text(category.name)
                 .font(.title)
-            
-            AsyncImage(url: URL(string: category.thumbnailURL)) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Text("Loading image...")
-                }
-                .frame(width: 200, height: 200)
-                .cornerRadius(20)
+
+            DisplayImage(imageURL: category.thumbnailURL, width: 150, height: 150)
             
             Spacer(minLength: 30)
             
@@ -33,7 +27,7 @@ struct CategoryView: View {
             Text("Items in stock: \(category.productsInStockCount)")
                 .font(.subheadline)
         }
-           .cardFrame()
+        .outlineFrame()
     }
 
 }

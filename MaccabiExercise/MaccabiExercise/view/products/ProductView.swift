@@ -15,17 +15,10 @@ struct ProductView: View {
         
         VStack(alignment: .center, spacing: 8) {
 
-            AsyncImage(url: URL(string: product.imageURL)) { image in
-                image.resizable()
-                     .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Text("Loading image...")
-                }
-                .frame(width: 200, height: 200)
-                .cornerRadius(20)
+            DisplayImage(imageURL: product.imageURL, width: 150, height: 150)
 
             HStack {
-                VStack (alignment: .leading){
+                VStack (alignment: .leading) {
                     
                     Text(product.name)
                         .font(.headline)
@@ -42,9 +35,8 @@ struct ProductView: View {
                 }
                 Spacer()
             }
-            Spacer()
         }
-            .cardFrame()
+        .outlineFrame()
     }
     
    

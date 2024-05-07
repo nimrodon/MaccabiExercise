@@ -13,7 +13,11 @@ struct MainView: View {
     
     var body: some View {
         if viewModel.isDataReady {
-            CategoriesView()
+            NavigationView {
+                VStack {
+                    CategoriesView()
+                }
+            }
         }
         else {
             if viewModel.errorMessage != nil {

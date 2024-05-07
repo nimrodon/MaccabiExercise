@@ -12,25 +12,21 @@ struct CategoriesView: View {
     @EnvironmentObject var viewModel: ProductsViewModel
     
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
-                            
-                            let category: CategoryDisplayModel = viewModel.categoriesDisplayModel[index]
-                            let products: [ProductDisplayModel] = viewModel.productsDisplayModel[category.name] ?? []
-                            
-                            NavigationLink (destination: CategoryProductsView(categoryName: category.name, products: products))  {
-                                CategoryView(category: category)
-                            }
-                            .foregroundColor(.primary)
-                        }
+        ScrollView {
+            LazyVStack {
+                ForEach(viewModel.categoriesDisplayModel.indices, id: \.self) { index in
+                    
+                    let category: CategoryDisplayModel = viewModel.categoriesDisplayModel[index]
+                    let products: [ProductDisplayModel] = viewModel.productsDisplayModel[category.name] ?? []
+                    
+                    NavigationLink (destination: CategoryProductsView(categoryName: category.name, products: products)) {
+                        CategoryView(category: category)
                     }
+                    .foregroundColor(.primary)
                 }
             }
-            .navigationTitle("Categories")
         }
+        .navigationTitle("Categories")
     }
 }
 
