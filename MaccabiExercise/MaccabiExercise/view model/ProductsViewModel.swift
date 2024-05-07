@@ -9,6 +9,12 @@ import Foundation
 
 typealias CategoryName = String
 
+/*
+ 
+  View model responsible for managing products data
+
+*/
+
 final class ProductsViewModel: ObservableObject {
     
     private var productsService: ProductsServiceProtocol
@@ -17,8 +23,8 @@ final class ProductsViewModel: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published private(set) var showRetryButton = false
 
-    @Published private(set) var productsDisplayModel: [CategoryName: [ProductDisplayModel]] = [:]
     @Published private(set) var categoriesDisplayModel: [CategoryDisplayModel] = []
+    @Published private(set) var productsDisplayModel: [CategoryName: [ProductDisplayModel]] = [:]
     
     
     init(_ productsService: ProductsServiceProtocol) {
@@ -66,13 +72,21 @@ final class ProductsViewModel: ObservableObject {
     }
     
     
+    /*
+     Builds display models for products and categories based on the provided products.
+     - Parameter products: An array of `Product` objects
+    */
     private func buildDisplayModels(products: [Product]) {
 
         var categoriesDisplayModelDict: [CategoryName: CategoryDisplayModel] = [:]
         var categoryCounter = 0
         
         for product in products {
+
+            // check if product's category is new:
             if !productsDisplayModel.keys.contains(product.category) {
+                
+                //add initial category display data
                 productsDisplayModel[product.category] = []
                 categoryCounter += 1
                 categoriesDisplayModelDict[product.category] = CategoryDisplayModel(name: product.category,
@@ -82,17 +96,20 @@ final class ProductsViewModel: ObservableObject {
                                                                                     order: categoryCounter)
             }
             else {
+                // increase distinct products count for category and accumulate category stock count
                 categoriesDisplayModelDict[product.category]?.distinctProductsCount += 1
                 categoriesDisplayModelDict[product.category]?.productsInStockCount += product.stock
             }
-            
+
+            // add new product display data
             let productDisplayModel = ProductDisplayModel(name: product.title,
-                                                          imageURLs: product.images,
+                                                          imageURL: product.images[0],
                                                           price: product.price,
                                                           stockCount: product.stock)
             productsDisplayModel[product.category]?.append(productDisplayModel)
         }
         
+        // sort categories according to the original order they appear in producs array
         categoriesDisplayModel = categoriesDisplayModelDict.values.sorted { $0.order < $1.order }
     }
 }

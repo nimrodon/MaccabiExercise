@@ -14,7 +14,6 @@ struct ErrorMessageView: View {
     var errorMessage: String
     var showRetryButton: Bool
 
-
     var body: some View {
         VStack {
             Text("Loading data failed:")
