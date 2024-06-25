@@ -28,7 +28,7 @@ struct Product: Codable {
     let images: [String]
     
     // The price of the product
-    let price: Int
+    let price: Double
     
     // The stock count of the product
     let stock: Int
@@ -72,7 +72,7 @@ struct ProductDisplayModel {
     let imageURL: String
     
     // The price of the product
-    let price: Int
+    let price: Double
     
     // The stock count of the product
     let stockCount: Int
