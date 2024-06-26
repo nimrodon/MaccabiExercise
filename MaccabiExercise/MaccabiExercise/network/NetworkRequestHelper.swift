@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Combine
 /*
  
  A helper class for making asynchronous network requests and handling network-related errors.
@@ -24,16 +24,18 @@ class NetworkRequestHelper {
      - Returns: A decoded object of the specified type.
      - Throws: An error of type `NetworkError` if fetching or parsing JSON data fails.
     */
-    static func fetchJSON<T: Decodable>(_ type: T.Type, from request: URLRequest) async throws -> T {
-        let data = try await fetchData(for: request)
-        do {
-            let parsedJSON = try JSONDecoder().decode(T.self, from: data)
-            return parsedJSON
-        } catch {
-            throw NetworkError.parsingFailure(description: error.localizedDescription)
-        }
-    }
 
+    static func fetchJSON<T: Decodable>(_ type: T.Type, from request: URLRequest) -> AnyPublisher<T, NetworkError> {
+        return fetchData(for: request)
+            .decode(type: T.self, decoder: JSONDecoder())
+            .mapError { error in
+                if let decodingError = error as? DecodingError {
+                    return NetworkError.parsingFailure(description: decodingError.localizedDescription)
+                }
+                return error as? NetworkError ?? NetworkError.unknown(description: error.localizedDescription)
+            }
+            .eraseToAnyPublisher()
+    }
     
     /*
      Determines whether a network request should be retried based on the given error.
@@ -63,45 +65,25 @@ class NetworkRequestHelper {
      - Returns: The fetched data.
      - Throws: An error of type `NetworkError` if fetching data fails after retry attempts.
     */
-    private static func fetchData(for request: URLRequest, maxRetries: Int = 3, retryDelay: TimeInterval = 1.0) async throws -> Data {
+    private static func fetchData(for request: URLRequest, maxRetries: Int = 3, retryDelay: TimeInterval = 1.0)  -> AnyPublisher<Data, NetworkError> {
         
-        var retries = 0
-        var lastError: NetworkError?
-        
-        while retries <= maxRetries {
-            do {
-                
-                let (data, response) = try await URLSession.shared.data(for: request)
-                
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw NetworkError.unknown(description: "Invalid HTTP response")
                 }
-                
                 guard (200...299).contains(httpResponse.statusCode) else {
                     let description = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
                     throw NetworkError.httpFailure(statusCode: httpResponse.statusCode, description: description)
                 }
-                
                 return data
-                
-            } catch {
-                let networkError = mapErrorToNetworkError(error)
-                
-                if !shouldRetryRequest(for: networkError) || retries >= maxRetries  {
-                    throw networkError
-                }
-                
-                retries += 1
-                lastError = networkError
-                
-                print("NetworkRequestHelper => retrying in \(retryDelay) seconds due to: \(networkError.description)")
-                try await Task.sleep(nanoseconds: UInt64(retryDelay * 1_000_000_000))
             }
-        }
-
-        throw lastError ?? NetworkError.unknown(description: "Unknown error occurred.")
+            .mapError { error in
+                mapErrorToNetworkError(error)
+            }
+            .retry(maxRetries)
+            .eraseToAnyPublisher()
     }
-    
     
     /*
     Maps the given error to a corresponding `NetworkError`.

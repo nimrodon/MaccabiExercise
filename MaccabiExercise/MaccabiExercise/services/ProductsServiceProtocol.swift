@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Combine
 /*
  
  A protocol defining the interface for a products service, which provides methods for fetching products asynchronously.
@@ -16,12 +16,12 @@ import Foundation
 protocol ProductsServiceProtocol {
     
     /*
-       Fetches a list of products asynchronously.
+       Fetches a publisher of products.
        
-       - Returns: An array of `Product` objects representing the products.
+       - Returns: A publisher that emits `Product` objects representing the products.
        - Throws: An error if the operation fails.
     */
-    func getProducts() async throws -> [Product]
+    func getProducts() -> AnyPublisher<[Product], Error>
 }
 
 

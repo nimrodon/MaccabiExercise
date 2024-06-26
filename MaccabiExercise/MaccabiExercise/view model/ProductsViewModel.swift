@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 typealias CategoryName = String
 
@@ -26,49 +27,43 @@ final class ProductsViewModel: ObservableObject {
     @Published private(set) var categoriesDisplayModel: [CategoryDisplayModel] = []
     @Published private(set) var productsDisplayModel: [CategoryName: [ProductDisplayModel]] = [:]
     
+    private var cancellables: Set<AnyCancellable> = []
     
     init(_ productsService: ProductsServiceProtocol) {
         self.productsService = productsService
+        fetchProducts()
     }
 
     
-    func fetchProducts() async {
-        
-        do {
-
-            let products = try await productsService.getProducts()
-
-            DispatchQueue.main.async {
+    func fetchProducts() {
+        productsService.getProducts()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.isDataReady = true
+                    self.errorMessage = nil
+                    self.showRetryButton = false
+                case .failure(let error):
+                    self.isDataReady = false
+                    if let networkError = error as? NetworkError {
+                        self.errorMessage = networkError.description
+                        self.showRetryButton = NetworkRequestHelper.shouldRetryRequest(for: networkError)
+                    }
+                    else {
+                        self.errorMessage = "Unknown error: \(error.localizedDescription)"
+                        self.showRetryButton = false
+                    }
+                }
+            }, receiveValue: { products in
                 self.buildDisplayModels(products: products)
-                self.isDataReady = true
-                self.errorMessage = nil
-                self.showRetryButton = false
-            }
-            
-        } catch let networkError as NetworkError {
-            DispatchQueue.main.async {
-                self.isDataReady = false
-                self.errorMessage = networkError.description
-                self.showRetryButton = NetworkRequestHelper.shouldRetryRequest(for: networkError)
-            }
-        } catch {
-            DispatchQueue.main.async {
-                self.isDataReady = false
-                self.errorMessage = "Unknown error: \(error.localizedDescription)"
-                self.showRetryButton = false
-            }
-        }
+            })
+            .store(in: &cancellables)
     }
     
     
     func retryFetchProducts() {
-        DispatchQueue.main.async {
-            self.errorMessage = nil
-            self.showRetryButton = false
-        }
-        Task {
-            await fetchProducts()
-        }
+        fetchProducts()
     }
     
     

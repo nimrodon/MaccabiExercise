@@ -22,9 +22,6 @@ struct MaccabiExerciseApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(viewModel)
-                .task {
-                    await viewModel.fetchProducts()
-                }
         }
     }
 }
