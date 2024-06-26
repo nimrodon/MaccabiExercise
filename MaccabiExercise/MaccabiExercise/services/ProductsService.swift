@@ -38,7 +38,7 @@ class ProductsService : ProductsServiceProtocol {
      - Throws: Any errors encountered during the retrieval process.
     */
  
-    func getProducts() -> AnyPublisher<[Product], Error> {
+    func getProducts() -> AnyPublisher<[Product], NetworkError> {
         let currentTime = Date()
         
         if let lastCachingTime = cacheService?.getLastCachingTime(),
@@ -46,7 +46,7 @@ class ProductsService : ProductsServiceProtocol {
            let cachedProducts = cacheService?.getCachedProducts()
         {
             return Just(cachedProducts)
-                .setFailureType(to: Error.self)
+                .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
         } else {
             return getProductsFromAPI()
@@ -60,7 +60,7 @@ class ProductsService : ProductsServiceProtocol {
      - Returns: An array of `Product` objects retrieved from the API.
      - Throws: Any network-related errors encountered during the API request.
     */
-    private func getProductsFromAPI() -> AnyPublisher<[Product], Error> {
+    private func getProductsFromAPI() -> AnyPublisher<[Product], NetworkError> {
         guard let url = URL(string: apiEndPoint) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
@@ -72,15 +72,9 @@ class ProductsService : ProductsServiceProtocol {
                 self.cacheService?.cacheProducts(products: productsQueryResponse.products)
                 return productsQueryResponse.products
             }
-            .catch { networkError -> AnyPublisher<[Product], Error> in
-//                if let networkError = error as? NetworkError {
-                    print("*** ProductsService => NetworkError: \(networkError.description)")
-                    return Fail(error: networkError).eraseToAnyPublisher()
-//                } else {
-//                    let unknownError = NetworkError.unknown(description: error.localizedDescription)
-//                    print("*** ProductsService => Unknown Error: \(unknownError.description)")
-//                    return Fail(error: unknownError).eraseToAnyPublisher()
-//                }
+            .catch { error -> AnyPublisher<[Product], NetworkError> in
+                    print("*** ProductsService => Error: \(error.description)")
+                    return Fail(error: error).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

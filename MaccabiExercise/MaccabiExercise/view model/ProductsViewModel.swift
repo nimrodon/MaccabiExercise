@@ -44,16 +44,10 @@ final class ProductsViewModel: ObservableObject {
                     self.isDataReady = true
                     self.errorMessage = nil
                     self.showRetryButton = false
-                case .failure(let error):
+                case .failure(let networkError):
                     self.isDataReady = false
-                    if let networkError = error as? NetworkError {
-                        self.errorMessage = networkError.description
-                        self.showRetryButton = NetworkRequestHelper.shouldRetryRequest(for: networkError)
-                    }
-                    else {
-                        self.errorMessage = "Unknown error: \(error.localizedDescription)"
-                        self.showRetryButton = false
-                    }
+                    self.errorMessage = networkError.description
+                    self.showRetryButton = NetworkRequestHelper.shouldRetryRequest(for: networkError)
                 }
             }, receiveValue: { products in
                 self.buildDisplayModels(products: products)

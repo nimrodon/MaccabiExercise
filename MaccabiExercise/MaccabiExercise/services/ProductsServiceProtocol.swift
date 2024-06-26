@@ -21,7 +21,7 @@ protocol ProductsServiceProtocol {
        - Returns: A publisher that emits `Product` objects representing the products.
        - Throws: An error if the operation fails.
     */
-    func getProducts() -> AnyPublisher<[Product], Error>
+    func getProducts() -> AnyPublisher<[Product], NetworkError>
 }
 
 
