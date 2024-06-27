@@ -24,10 +24,10 @@ class ProductsService : ProductsServiceProtocol {
     // The duration (in seconds) for which cached product data remains valid.
     let cachingPeriodInSeconds: TimeInterval = 3600
 
-//    private var cancellables: Set<AnyCancellable> = []
     
     init() {
-        cacheService = ProductsFileCacheService()
+//        cacheService = ProductsFileCacheService()
+        cacheService = ProductsCoreDataCacheService()
     }
 
     
